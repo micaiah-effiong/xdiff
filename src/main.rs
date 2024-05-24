@@ -49,11 +49,11 @@ fn main() {
             }
         }
 
-        if b[pos.x] == a[pos.y] {
-            println!("item:{} at x:{} y:{}", b[pos.x], pos.x, pos.y);
-        } else {
-            println!("no item at x:{} y:{}", pos.x, pos.y);
-        }
+        // if b[pos.x] == a[pos.y] {
+        //     println!("item:{} at x:{} y:{}", b[pos.x], pos.x, pos.y);
+        // } else {
+        //     println!("no item at x:{} y:{}", pos.x, pos.y);
+        // }
 
         for dir in dirs {
             let x = pos.x + dir[0];
