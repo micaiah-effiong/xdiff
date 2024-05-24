@@ -1,47 +1,39 @@
-# Diff
+# xdiff
 
-Given [g,o,o,g,l,e] and [g,o,g,l,e] expected result
-
-```diff
-g
-o
-- o
-g
-l
-e
-```
-
-```mermaid
-graph TD;
-    G-->O;
-    O-->O2;
-    O2-->G2;
-    O-->G2;
-    G2-->L;
-    L-->E;
-```
+Given `A = abcabba` and `B = cbabac` expected result
 
 ```diff
-A|C
-B|B
-C|A
-A|B
-B|A
-B|C
-A
-```
+- A
+- B
+  C
+- A
+  B
++ A
+  B
+  A
++ C
 
-```marmaid
-graph TD;
-    C+1-->B;
-    A-->B;
-    B-->A;
-    A-->B2;
-    B2-->A2;
-    A2-->C;
-    B-->C;
-    C-->A2;
-    A2-->B2;
-    B2-->B3;
-    B3-->A3;
+or
+
+- A
++ C
+  B
+- C
+  A
+  B
+- B
+  A
++ C
+
+or
+
++ C
+- A
+  B
+- C
+  A
+  B
+- B
+  A
++ C
 ```
