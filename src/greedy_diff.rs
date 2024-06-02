@@ -14,6 +14,7 @@ fn shortest_edit(a: &Vec<&str>, b: &Vec<&str>) -> Vec<Vec<isize>> {
         let d = dd as isize;
         trace.push(v.clone());
 
+        // -d..d would still yeild a valid shortest_edit_graph
         for kk in (-d..d + 1).step_by(2) {
             let k = kk;
             let mut x: isize;
