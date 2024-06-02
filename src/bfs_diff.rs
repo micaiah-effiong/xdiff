@@ -9,10 +9,10 @@ struct Node {
     points: Vec<[usize; 3]>,
 }
 
-pub fn diff() {
+pub fn diff(a: &Vec<&str>, b: &Vec<&str>) {
     // A = abcabba and B = cbabac.
-    let a: Vec<&str> = vec!["a", "b", "c", "a", "b", "b", "a"];
-    let b: Vec<&str> = vec!["c", "b", "a", "b", "a", "c"];
+    // let a: Vec<&str> = vec!["a", "b", "c", "a", "b", "b", "a"];
+    // let b: Vec<&str> = vec!["c", "b", "a", "b", "a", "c"];
 
     // [x:0, y:2, pos:0]
     // new
@@ -96,8 +96,8 @@ pub fn diff() {
 
     if a[top[1]] == b[top[0]] {
     } else {
-        println!("-{}", a[top[1]]);
-        println!("+{}", b[top[0]]);
+        println!("{}-  {}{}", Tag::DEL.get_color(), a[top[1]], END);
+        println!("{}+  {}{}", Tag::INS.get_color(), b[top[0]], END);
     }
 
     for point in list {
@@ -106,14 +106,41 @@ pub fn diff() {
         let d_p = point[2];
 
         if d_p == 0 {
-            println!("{}", d_a);
+            println!("{}   {}{}", Tag::EQL.get_color(), d_a, END);
         } else if d_p == 1 {
-            println!("-{}", d_a);
+            println!("{}-  {}{}", Tag::DEL.get_color(), d_a, END);
         } else {
-            println!("+{}", d_b);
+            println!("{}+  {}{}", Tag::INS.get_color(), d_b, END);
             // println!("+{}", d_b);
         }
 
         // println!("{} {} {}", a[point[1]], b[point[0]], point[2])
+    }
+}
+
+const END: &str = "\u{001b}[0m";
+
+#[derive(Debug)]
+enum Tag {
+    INS,
+    DEL,
+    EQL,
+}
+
+impl Tag {
+    fn to_str(&self) -> &str {
+        match self {
+            Tag::INS => "+",
+            Tag::DEL => "-",
+            Tag::EQL => " ",
+        }
+    }
+
+    fn get_color(&self) -> &str {
+        return match self {
+            Tag::INS => "\u{001b}[38;5;158m\u{001b}[48;5;22m",
+            Tag::DEL => "\u{001b}[38;5;217m\u{001b}[48;5;52m",
+            Tag::EQL => "\u{001b}[39m",
+        };
     }
 }
